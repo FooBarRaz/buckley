@@ -2,24 +2,30 @@
   "name": "bcli",
   "version": "1.0.0",
   "description": "BuildCLI (Buckley)",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "prepublishOnly": "tsc"
+  },
   "author": "raz.ali@slalom.com",
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.2",
-    "commander": "^3.0.2",
-    "figlet": "^1.2.4",
+    "commander": "^12.0.0",
+    "figlet": "^1.7.0",
     "find": "^0.3.0",
     "inquirer": "^7.0.0",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.15",
-    "nodegit": "^0.26.2",
     "promise": "^8.0.3"
   },
   "bin": {
-    "bcli": "./index.js"
+    "bcli": "dist/index.js"
   },
   "devDependencies": {
-    "jest": "^24.9.0"
+    "@types/figlet": "^1.5.8",
+    "jest": "^24.9.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
   }
 }

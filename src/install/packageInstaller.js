@@ -47,6 +47,7 @@ function action(env) {
         if (!env.dry) {
             installablePackages.forEach(installPackage);
         }
+
     }
 }
 

@@ -10,8 +10,8 @@ function install_node() {
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
     
     # setup node
-    nvm install 10.13.0
-    nvm use 10.13.0
+    nvm install 22
+    nvm use 22
     echo "Node.js/NPM was successfully installed via Node Version Manager (NVM). Visit https://github.com/nvm-sh/nvm for more information on how to use NVM."
 }
 

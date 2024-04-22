@@ -1,0 +1,78 @@
+{
+  "id": "my-example-config",
+  "name": "My Example Config",
+  "description": "This is an example configuration file.",
+  "version": "0.1",
+  "system": {
+    "supportedSystems": ["darwin"]
+  },
+  "provision": {
+    "git": {
+      "ssh": {
+        "keyPrefix": "id_rsa_slalom_"
+      },
+      "clone": [
+        {
+          "name": "my-repo",
+          "url": "",
+          "path": "~/my-repo"
+        }
+      ],
+      "aliases": [
+        {
+          "action": "commit",
+          "aliases": ["ci", "cm"],
+          "description": "Record changes to the repository"
+        },
+        {
+          "action": "commit --amend --no-edit",
+          "aliases": ["amend"],
+          "description": "Amend previous commit with staged changes (Will rewrite commit hash)"
+        },
+        {
+          "action": "diff --cached",
+          "aliases": ["dc", "ds"],
+          "description": "Show changes staged for commit (alias for --staged)"
+        },
+        {
+          "action": "branch",
+          "aliases": ["br", "b"],
+          "description": "List, create, or modify branches"
+        },
+        {
+          "action": "checkout",
+          "aliases": ["ch", "co"],
+          "description": "Switch branches or restore working tree files"
+        },
+        {
+          "action": "log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'",
+          "aliases": ["lol"],
+          "description": "Pretty print logs in one line"
+        }
+      ]
+    },
+    "shell": {
+        "env": {
+        },
+        "scripts": [
+
+        ],
+        "aliases": {
+
+        }
+    },
+    "brew": {
+      "packages": []
+    },
+    "node": {
+      "packageManager": "npm",
+      "packages": [
+        {
+          "name": "typescript",
+          "version": "latest",
+          "global": true
+        }
+      ]
+    }
+  }
+}
