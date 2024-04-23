@@ -15,9 +15,10 @@ jobs:
         node-version: '20'
         registry-url: 'https://registry.npmjs.org'
     - run: npm ci
-    # - run: npm test # brb
     - run: npm run build  # If you have a build script
+    - run: git stash --include-untracked
     - run: npm version patch -m "Upgrade to %s"
+    - run: git stash pop
     - run: git push origin main --tags
     - run: npm publish
       env:
