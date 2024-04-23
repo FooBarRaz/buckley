@@ -1,5 +1,5 @@
 {
-  "name": "bcli",
+  "name": "buckley",
   "version": "1.0.1",
   "description": "BuildCLI (Buckley)",
   "main": "dist/index.js",
