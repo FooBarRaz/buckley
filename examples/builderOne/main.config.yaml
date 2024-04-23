@@ -1,0 +1,44 @@
+id: my-example-config
+name: My Example Config
+description: This is an example configuration file.
+version: "0.1"
+system:
+  supportedSystems:
+    - darwin
+provision:
+  git:
+    ssh:
+      username: example@example.test
+      email: example@example.test
+      keyName: example_keypair
+    clone:
+      - name: my-repo
+        url: ""
+        path: "~/my-repo"
+  shell:
+    env: {}
+    commands:
+      - sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+      - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+    scripts: []
+    aliases: {}
+  brew:
+    packages:
+      - --cask 1password
+      - --cask google-chrome
+      - --cask slack
+      - --cask visual-studio-code
+      - --cask iterm2
+      - --cask rectangle
+      - --cask flycut
+      - autojump
+  node:
+    install:
+      - --lts
+    use:
+      - --lts
+    packageManager: npm
+    packages:
+      - name: typescript
+        version: latest
+        global: true
