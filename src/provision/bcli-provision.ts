@@ -1,16 +1,14 @@
-#!/usr/bin/env node
 import commander, { createArgument } from "commander";
 import { action } from "./provision";
 
-const cli = commander.createCommand("provision")
+const program = commander.createCommand("provision")
 
-cli
+program
   .name("provision")
-  .option("-l, --list", "list all options")
-  .option("-d, --dry", "do a dry-run without installing anything")
+  .option("-x --vars <varFile>", "read variables from a file")
   .description("sets up your workstation to get you ready to build")
   .addArgument(createArgument("filePath", "path to the config file"))
   .action(action);
 
 
-export { cli as program };
+export { program };

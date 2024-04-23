@@ -8,12 +8,6 @@ if (!process.argv.slice(2).length) {
 }
 
 cli
-  // .command("install", "install one or more packages to your workstation", {
-  //   executableFile: "./install/bcli-install",
-  // })
-  // .command("git", "helper functions related to git", {
-  //   executableFile: "./git/bcli-git.js",
-  // })
   .addCommand(provision)
   .parse(process.argv);
 

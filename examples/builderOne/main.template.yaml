@@ -8,8 +8,8 @@ system:
 provision:
   git:
     ssh:
-      username: example@example.test
-      email: example@example.test
+      username: ${myUsername}
+      email: ${myEmail}
       keyName: example_keypair
     clone:
       - name: my-repo
