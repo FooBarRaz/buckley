@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handler = void 0;
+exports.handle = void 0;
 const child_process_1 = require("child_process");
 function setEnvironmentVariables(config) {
     Object.entries(config.env_variables).forEach(([key, value]) => {
@@ -60,7 +60,7 @@ const executeCommands = (commands) => __awaiter(void 0, void 0, void 0, function
         }
     }
 });
-const handler = (config) => __awaiter(void 0, void 0, void 0, function* () {
+const handle = (config) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     console.log('executing shell handler: ', config);
     // Execute commands
@@ -78,7 +78,7 @@ const handler = (config) => __awaiter(void 0, void 0, void 0, function* () {
             }
         });
     });
-    setEnvironmentVariables(config);
-    defineAliases(config);
+    //   setEnvironmentVariables(config);
+    //   defineAliases(config);
 });
-exports.handler = handler;
+exports.handle = handle;

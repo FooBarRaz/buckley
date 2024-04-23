@@ -27,7 +27,7 @@ const execute = async (config: Configuration) => {
   }
 
   console.log(`Provisioning system for ${currentOs}...`);
-  const modules = ["shell"]; //Object.keys(config.provision);
+  const modules = Object.keys(config.provision);
 
   console.log(`Modules to provision: ${modules.join(", ")}`);
   modules.forEach(async (module) => {
