@@ -1,4 +1,4 @@
-import { exec } from "child_process";
+import { exec, spawnSync } from "child_process";
 
 export const installHomebrewPackage = (packageName: string): Promise<void> => {
   return new Promise((resolve, reject) => {
@@ -24,17 +24,12 @@ const checkBrewInstalled = (): Promise<void> => {
   return new Promise((resolve, reject) => {
     exec("brew --version", (error, stdout, stderr) => {
       if (error) {
-        // Brew is not installed, install it
-        exec(
-          '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"',
-          (error, stdout, stderr) => {
-            if (error) {
-              reject(error);
-            } else {
-              resolve();
-            }
-          }
-        );
+
+        childProcess.spawnSync('/bin/bash', ['-c', '"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'], {
+          stdio: 'inherit',
+          shell: true
+        });
+        resolve();
       } else {
         // Brew is already installed
         resolve();
