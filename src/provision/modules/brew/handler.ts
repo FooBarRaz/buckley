@@ -25,7 +25,7 @@ const checkBrewInstalled = (): Promise<void> => {
     exec("brew --version", (error, stdout, stderr) => {
       if (error) {
 
-        childProcess.spawnSync('/bin/bash', ['-c', '"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'], {
+        spawnSync('/bin/bash', ['-c', '"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'], {
           stdio: 'inherit',
           shell: true
         });
