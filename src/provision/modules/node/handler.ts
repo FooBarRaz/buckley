@@ -46,6 +46,17 @@ type NodeConfig = {
 export const handler = (config: NodeConfig) => {
   const nodeHandler = new NodeHandler();
 
+  const nvmInstalled = spawnSync("command -v nvm", { shell: true });
+  if (nvmInstalled.error) {
+    console.error("nvm is not installed");
+    const installNvm = spawnSync("curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash", { shell: true });
+    if (installNvm.error) {
+      console.error("Failed to install nvm");
+      return;
+    }
+    console.log("Successfully installed nvm");
+  }
+
   config.install.forEach((version) => {
     nodeHandler.installNode(version);
   });
