@@ -7,6 +7,11 @@ interface GitConfig {
     email?: string;
     keyName?: string;
   };
+  clone: Array<{
+    name: string;
+    url: string;
+    path: string;
+  }>;
 }
 
 interface SshCredentials {
@@ -22,10 +27,13 @@ class GitHandler {
     if (config.ssh) {
       result.ssh = this.createSshCredentials(config.ssh);
     }
+    if(config.clone) {
+      result.clone = this.cloneRepos(config.clone);
+    }
     return result;
   }
 
-  public createSshCredentials(config: GitConfig["ssh"]): SshCredentials {
+  private createSshCredentials(config: GitConfig["ssh"]): SshCredentials {
     // use keyName if provided, otherwise use default
     const keyName = config.keyName || "id_rsa";
 
@@ -45,6 +53,9 @@ class GitHandler {
         "utf8"
       );
 
+      console.log("SSH credentials created. Public key: ");
+      console.log(publicKey);
+
       return {
         privateKey,
         publicKey,
@@ -54,13 +65,24 @@ class GitHandler {
       throw error;
     }
   }
+
+  private cloneRepos(config: GitConfig["clone"]) {
+    config.forEach((repo) => {
+      const { name, url, path } = repo;
+      try {
+        const cloneCommand = `git clone ${url} ${path}/${name}`;
+        execSync(cloneCommand, { stdio: "inherit" });
+        console.log(`Cloned ${name} repository to ${path}/${name}`);
+      } catch (error) {
+        console.error(`Error cloning ${name} repository:`, error);
+        throw error;
+      }
+    });
+  }
 }
 
 export const handle = (config: GitConfig) => {
   const handler = new GitHandler();
   const response = handler.handle(config);
-  if (response.ssh.publicKey) {
-    console.log("SSH credentials created. Public key: ");
-    console.log(response?.ssh.publicKey);
-  }
+  return response;
 };
