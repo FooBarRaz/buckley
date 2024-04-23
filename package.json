@@ -1,6 +1,6 @@
 {
   "name": "buckley",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "BuildCLI (Buckley)",
   "main": "dist/index.js",
   "scripts": {
