@@ -54,19 +54,22 @@ const execute = (config) => __awaiter(void 0, void 0, void 0, function* () {
         process.exit(1);
     }
     console.log(`Provisioning system for ${currentOs}...`);
-    const modules = ['git']; //Object.keys(config.provision);
+    const modules = ["shell"]; //Object.keys(config.provision);
     console.log(`Modules to provision: ${modules.join(", ")}`);
     modules.forEach((module) => __awaiter(void 0, void 0, void 0, function* () {
-        console.log(`Provisioning ${module}...`);
+        console.debug(`Provisioning ${module}...`);
         try {
             const handler = yield Promise.resolve(`${`./modules/${module}/handler`}`).then(s => __importStar(require(s)));
+            console.log(`found module for ${module}`);
             const moduleConfigs = config.provision[module];
+            console.log(`found module config for ${module}`, moduleConfigs);
             if (handler.handle) {
-                handler.handle(moduleConfigs);
+                yield handler.handle(moduleConfigs);
             }
         }
         catch (e) {
             console.error(`Error: Could not provision module ${module}.`);
+            console.error(e);
         }
     }));
 });

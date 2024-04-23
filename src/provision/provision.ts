@@ -27,18 +27,21 @@ const execute = async (config: Configuration) => {
   }
 
   console.log(`Provisioning system for ${currentOs}...`);
-  const modules = ['git', 'brew'];//Object.keys(config.provision);
+  const modules = ["shell"]; //Object.keys(config.provision);
 
   console.log(`Modules to provision: ${modules.join(", ")}`);
   modules.forEach(async (module) => {
-    console.log(`Provisioning ${module}...`);
+    console.debug(`Provisioning ${module}...`);
     try {
       const handler = await import(`./modules/${module}/handler`);
-        const moduleConfigs = config.provision[module as keyof typeof config.provision];
+      console.log(`found module for ${module}`);
+      
+      const moduleConfigs =
+        config.provision[module as keyof typeof config.provision];
+        
+      console.log(`found module config for ${module}`, moduleConfigs);
       if (handler.handle) {
-        await handler.handle(
-          moduleConfigs
-        );
+        await handler.handle(moduleConfigs);
       }
     } catch (e) {
       console.error(`Error: Could not provision module ${module}.`);

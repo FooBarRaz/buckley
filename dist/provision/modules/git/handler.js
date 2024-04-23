@@ -9,29 +9,40 @@ const fs_1 = __importDefault(require("fs"));
 class GitHandler {
     constructor() { }
     handle(config) {
+        let result = {};
         if (config.ssh) {
-            this.createSshCredentials(config.ssh);
+            result.ssh = this.createSshCredentials(config.ssh);
         }
+        return result;
     }
     createSshCredentials(config) {
         // use keyName if provided, otherwise use default
         const keyName = config.keyName || "id_rsa";
         // Generate SSH key pair
-        const sshKeygenCommand = `ssh-keygen -t rsa -b 4096 -C "${config.email}"`;
-        (0, child_process_1.execSync)(sshKeygenCommand);
-        console.log('created ssh key pair');
-        // Read private and public keys
-        const privateKey = fs_1.default.readFileSync(`${process.env.HOME}/.ssh/${keyName}`, "utf8");
-        const publicKey = fs_1.default.readFileSync(`${process.env.HOME}/.ssh/${keyName}.pub`, "utf8");
-        return {
-            privateKey,
-            publicKey,
-        };
+        try {
+            const sshKeygenCommand = `ssh-keygen -t rsa -b 4096 -C "${config.email}" -f "${process.env.HOME}/.ssh/${keyName}" -q`;
+            (0, child_process_1.execSync)(sshKeygenCommand, { stdio: "inherit" });
+            console.log("created ssh key pair");
+            // Read private and public keys
+            const privateKey = fs_1.default.readFileSync(`${process.env.HOME}/.ssh/${keyName}`, "utf8");
+            const publicKey = fs_1.default.readFileSync(`${process.env.HOME}/.ssh/${keyName}.pub`, "utf8");
+            return {
+                privateKey,
+                publicKey,
+            };
+        }
+        catch (error) {
+            console.error("Error creating SSH key pair:", error);
+            throw error;
+        }
     }
 }
 const handle = (config) => {
     const handler = new GitHandler();
     const response = handler.handle(config);
-    console.log("Git handler response:", response);
+    if (response.ssh.publicKey) {
+        console.log("SSH credentials created. Public key: ");
+        console.log(response === null || response === void 0 ? void 0 : response.ssh.publicKey);
+    }
 };
 exports.handle = handle;
