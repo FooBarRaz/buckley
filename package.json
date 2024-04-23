@@ -4,6 +4,7 @@
   "description": "BuildCLI (Buckley)",
   "main": "dist/index.js",
   "scripts": {
+    "build": "tsc",
     "start": "ts-node src/index.ts",
     "prepublishOnly": "tsc"
   },
