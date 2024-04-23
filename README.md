@@ -19,7 +19,7 @@ It automates the provisioning of workstations with a set of tools and configurat
 
 To get started, run:
 
-`curl https://raw.githubusercontent.com/SlalomBuildATL/buckley/master/bootstrap.sh | bash`
+`curl https://raw.githubusercontent.com/FooBarRaz/buckley/main/bootstrap.sh | bash`
 
 Once `bcli` is installed, you can run `bcli --help` for a list of available commands.
 

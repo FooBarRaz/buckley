@@ -10,19 +10,14 @@ function install_node() {
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
     
     # setup node
-    nvm install 22
-    nvm use 22
+    nvm install --lts
+    nvm use --lts
     echo "Node.js/NPM was successfully installed via Node Version Manager (NVM). Visit https://github.com/nvm-sh/nvm for more information on how to use NVM."
 }
 
 function install_buckley() {
-    mkdir -p ~/dev
-    cd ~/dev
-    git clone https://github.com/FooBarRaz/buckley.git
-    cd buckley
-    npm install -g .
+    npm install -g buckley
     echo "Buckley was successfully installed. Please use 'bcli install --tags recommended' to install recommended packages"
-
 }
 
 #check for npm installation
