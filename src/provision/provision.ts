@@ -27,7 +27,7 @@ const execute = async (config: Configuration) => {
   }
 
   console.log(`Provisioning system for ${currentOs}...`);
-  const modules = ['git'];//Object.keys(config.provision);
+  const modules = ['git', 'brew'];//Object.keys(config.provision);
 
   console.log(`Modules to provision: ${modules.join(", ")}`);
   modules.forEach(async (module) => {
@@ -36,7 +36,7 @@ const execute = async (config: Configuration) => {
       const handler = await import(`./modules/${module}/handler`);
         const moduleConfigs = config.provision[module as keyof typeof config.provision];
       if (handler.handle) {
-        handler.handle(
+        await handler.handle(
           moduleConfigs
         );
       }

@@ -54,19 +54,27 @@
       ]
     },
     "shell": {
-        "env": {
-        },
-        "scripts": [
-
-        ],
-        "aliases": {
-
-        }
+      "env": {},
+      "commands": [
+        "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash"
+      ],
+      "scripts": [
+      ],
+      "aliases": {}
     },
     "brew": {
-      "packages": []
+      "packages": [
+        "--cask 1password",
+        "--cask google-chrome",
+        "--cask visual-studio-code",
+        "--cask iterm2",
+        "--cask rectangle",
+        "--cask flycut"
+      ]
     },
     "node": {
+      "install": ["--lts"],
+      "use": ["--lts"],
       "packageManager": "npm",
       "packages": [
         {
