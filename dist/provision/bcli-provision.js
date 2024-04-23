@@ -24,29 +24,15 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const commander_1 = require("commander");
-const figlet = __importStar(require("figlet"));
-const bcli_provision_1 = require("./provision/bcli-provision");
-if (!process.argv.slice(2).length) {
-    commander_1.program.outputHelp(figletPrint);
-}
-commander_1.program
-    // .command("install", "install one or more packages to your workstation", {
-    //   executableFile: "./install/bcli-install",
-    // })
-    // .command("git", "helper functions related to git", {
-    //   executableFile: "./git/bcli-git.js",
-    // })
-    .addCommand(bcli_provision_1.program)
-    .parse(process.argv);
-function figletPrint(text) {
-    let header = figlet.textSync("Buckley", {
-        horizontalLayout: "default",
-        verticalLayout: "default",
-    });
-    const subtitle = `########################### Build CLI (bcli)
-    \n
-    `;
-    const banner = `${header}\n${subtitle}`;
-    return banner;
-}
+exports.program = void 0;
+const commander_1 = __importStar(require("commander"));
+const provision_1 = require("./provision");
+const cli = commander_1.default.createCommand("provision");
+exports.program = cli;
+cli
+    .name("provision")
+    .option("-l, --list", "list all options")
+    .option("-d, --dry", "do a dry-run without installing anything")
+    .description("sets up your workstation to get you ready to build")
+    .addArgument((0, commander_1.createArgument)("filePath", "path to the config file"))
+    .action(provision_1.action);

@@ -3,7 +3,7 @@ import path from 'path';
 
 type Platforms = "darwin" | "win32" | "linux";
 
-type Configuration = {
+export type Configuration = {
   id: string;
   name: string;
   description: string;
@@ -18,7 +18,7 @@ type Configuration = {
   }
 }
 
-function parseConfigFile(filePath: string): Configuration {
+export function parseConfigFile(filePath: string): Configuration {
   const absolutePath = path.resolve(filePath);
   const fileContents = fs.readFileSync(absolutePath, 'utf-8');
   const config: Configuration = JSON.parse(fileContents);

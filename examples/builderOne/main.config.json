@@ -9,7 +9,9 @@
   "provision": {
     "git": {
       "ssh": {
-        "keyPrefix": "id_rsa_slalom_"
+        "username": "example@example.test",
+        "email": "example@example.test",
+        "keyName": "example_keypair"
       },
       "clone": [
         {

@@ -1,21 +1,20 @@
 #!/usr/bin/env node
 import { program as cli } from "commander";
 import * as figlet from "figlet";
+import { program as provision} from './provision/bcli-provision';
 
 if (!process.argv.slice(2).length) {
   cli.outputHelp(figletPrint);
 }
 
 cli
-  .command("install", "install one or more packages to your workstation", {
-    executableFile: "./install/bcli-install",
-  })
-  .command("git", "helper functions related to git", {
-    executableFile: "./git/bcli-git.js",
-  })
-  .command("provision", "workstation setup and configuration", {
-    executableFile: "./provision/bcli-provision",
-  })
+  // .command("install", "install one or more packages to your workstation", {
+  //   executableFile: "./install/bcli-install",
+  // })
+  // .command("git", "helper functions related to git", {
+  //   executableFile: "./git/bcli-git.js",
+  // })
+  .addCommand(provision)
   .parse(process.argv);
 
 function figletPrint(text: string): string {

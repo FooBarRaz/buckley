@@ -10,6 +10,18 @@
             "name": "Launch Program",
             "program": "${workspaceFolder}/install/bcli-install",
             "args": ["--name", "testPAckage"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug npm run start",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "start", "--" ,"provision", "${input:filePath}"],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "input": {
+
+            }
         }
     ]
 }
